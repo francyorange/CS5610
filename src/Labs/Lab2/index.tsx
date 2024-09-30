@@ -6,6 +6,11 @@ import Padding from "./Padding";
 import Margins from "./Margins";
 import Corners from "./Corners";
 import Dimensions from "./Dimensions";
+import Positions from "./Positions";
+import Zindex from "./Zindex";
+import Float from "./Float";
+import GridLayout from "./GridLayout";
+import Flex from "./Flex";
 export default function Lab2() {
   return (
     <div id="wd-lab2">
@@ -51,27 +56,18 @@ export default function Lab2() {
           </div>
         </div>
       </div>
-      <div>
-        <ForegroundColors />
-      </div>
-      <div>
-        <BackgroundColors />
-      </div>
-      <div>
-        <Borders />
-      </div>
-      <div>
-        <Padding />
-      </div>
-      <div>
-        <Margins />
-      </div>
-      <div>
-        <Corners />
-      </div>
-      <div>
-        <Dimensions />
-      </div>
+      <ForegroundColors />
+      <BackgroundColors />
+      <Borders />
+      <Padding />
+      <Margins />
+      <Corners />
+      <Dimensions />
+      <Positions />
+      <Zindex />
+      <Float />
+      <GridLayout />
+      <Flex />
     </div>
   );
 }
