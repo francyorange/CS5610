@@ -10,7 +10,7 @@ export default function App() {
       <div>
         <Routes>
           {/* making Kanbas a landing page is optional. Both info mentioned in the assignment description and lecture will be considered as right solution. See https://piazza.com/class/m0mf6mduttu4nn/post/103_f2  */}
-          <Route path="/" element={<Navigate to="/Labs/Lab1" />} />
+          <Route path="/" element={<Navigate to="/Labs/Lab2" />} />
           <Route path="/Labs/*" element={<Labs />} />
           <Route path="/Kanbas/*" element={<Kanbas />} />
         </Routes>
