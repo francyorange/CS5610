@@ -8,6 +8,7 @@ import * as db from "../../Database";
 export default function Assignments() {
     const { cid } = useParams();
     const { assignments } = db;
+
     return (
         <div>
             <AssignmentsControls /><br /><br />
@@ -29,7 +30,7 @@ export default function Assignments() {
                                     <AssignmentControlButtons />
                                 </div>
                                 <div className="flex-grow-1 p-2">
-                                    <a className="link-dark link-offset-2 link-underline-opacity-0" href="#/Kanbas/Courses/1234/Assignments/123">
+                                    <a className="link-dark link-offset-2 link-underline-opacity-0" href={`/#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
                                         <b>{assignment.title}</b></a><br />
                                     <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> May 6 at 12:00 am | <b>Due</b> May 13 at 11:59pm | 100 pts
                                 </div>
@@ -40,8 +41,8 @@ export default function Assignments() {
                         </li>))}
                     </ul>
                 </li>
-            </ul>
-        </div>
+            </ul >
+        </div >
     );
 }
 
