@@ -21,6 +21,7 @@ body * {
     color: black;
     background-color: white;
     border-left: 3px solid black !important;
+    margin-left: -3px;
 }
 
 .btn-secondary {

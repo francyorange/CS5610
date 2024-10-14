@@ -3,7 +3,11 @@ import AssignmentsControls from "./AssignmentsControls";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import { IoCaretDown, IoEllipsisVertical } from "react-icons/io5";
+import { useParams } from "react-router-dom";
+import * as db from "../../Database";
 export default function Assignments() {
+    const { cid } = useParams();
+    const { assignments } = db;
     return (
         <div>
             <AssignmentsControls /><br /><br />
@@ -18,51 +22,22 @@ export default function Assignments() {
                         <IoEllipsisVertical className="fs-4" />
                     </div>
                     <ul className="wd-assignment-list list-group rounded-0">
-                        <li className="wd-lesson list-group-item ps-1">
+                        {assignments.filter((assignment: { course: any; }) => assignment.course === cid).map((assignment: any) =>
+                        (<li className="wd-lesson list-group-item ps-1">
                             <div className="d-flex flex-row align-items-center">
                                 <div className="flex-shrink-0 ">
                                     <AssignmentControlButtons />
                                 </div>
                                 <div className="flex-grow-1 p-2">
                                     <a className="link-dark link-offset-2 link-underline-opacity-0" href="#/Kanbas/Courses/1234/Assignments/123">
-                                        <b>A1</b></a><br />
+                                        <b>{assignment.title}</b></a><br />
                                     <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> May 6 at 12:00 am | <b>Due</b> May 13 at 11:59pm | 100 pts
                                 </div>
                                 <div className="flex-shrink-0">
                                     <LessonControlButtons />
                                 </div>
                             </div>
-                        </li>
-                        <li className="wd-lesson list-group-item ps-1">
-                            <div className="d-flex flex-row align-items-center">
-                                <div className="flex-shrink-0 ">
-                                    <AssignmentControlButtons />
-                                </div>
-                                <div className="flex-grow-1 p-2">
-                                    <a className="link-dark link-offset-2 link-underline-opacity-0" href="#/Kanbas/Courses/1234/Assignments/123">
-                                        <b>A2</b></a><br />
-                                    <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> May 13 at 12:00 am | <b>Due</b> May 20 at 11:59pm | 100 pts
-                                </div>
-                                <div className="flex-shrink-0">
-                                    <LessonControlButtons />
-                                </div>
-                            </div>
-                        </li>
-                        <li className="wd-lesson list-group-item ps-1">
-                            <div className="d-flex flex-row align-items-center">
-                                <div className="flex-shrink-0 ">
-                                    <AssignmentControlButtons />
-                                </div>
-                                <div className="flex-grow-1 p-2">
-                                    <a className="link-dark link-offset-2 link-underline-opacity-0" href="#/Kanbas/Courses/1234/Assignments/123">
-                                        <b>A3</b></a><br />
-                                    <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> May 20 at 12:00 am | <b>Due</b> May 27 at 11:59pm | 100 pts
-                                </div>
-                                <div className="flex-shrink-0">
-                                    <LessonControlButtons />
-                                </div>
-                            </div>
-                        </li>
+                        </li>))}
                     </ul>
                 </li>
             </ul>

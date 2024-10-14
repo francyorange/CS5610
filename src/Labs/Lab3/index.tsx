@@ -30,8 +30,10 @@ import TodoList from "./todos/TodoList";
 import VariablesAndConstants from "./VariablesAndConstants";
 import VariableTypes from "./VariableTypes";
 import Highlight from "./Highlight";
-import AddPathParameters from "./AddPathParameters";
+import PathParameters from "./PathParameters";
 export default function Lab3() {
+  console.log('Hello World!');
+
   return (
     <div id="wd-lab3">
       <h3>Lab 3</h3>
@@ -72,7 +74,7 @@ export default function Lab3() {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipitratione eaque illo minus cum, saepe totam
         vel nihil repellat nemo explicabo excepturi consectetur. Modi omnis minus sequi maiores, provident voluptates.
       </Highlight>
-      <AddPathParameters />
+      <PathParameters />
 
     </div>
   );
