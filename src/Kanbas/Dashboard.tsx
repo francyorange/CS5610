@@ -40,6 +40,7 @@ export default function Dashboard({
                   enrollment.course === course._id
               ))
             .map((course) => (
+
               <div className="wd-dashboard-course col" style={{ width: "300px" }}>
                 <div className="card rounded-3 overflow-hidden">
                   <Link to={`/Kanbas/Courses/${course._id}/Home`}
