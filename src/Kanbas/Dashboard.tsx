@@ -61,9 +61,8 @@ export default function Dashboard({
                 isEnrolled ? (
                   <button className="btn btn-danger float-end"
                     onClick={(event) => {
-                      console.log("unenroll onclick")
                       event.preventDefault();
-                      dispatch(unenroll({ studentId: currentUser._id, courseId: course._id }))
+                      dispatch(unenroll({ user: currentUser._id, course: course._id }))
                     }}>
                     Unenroll
                   </button>
@@ -71,7 +70,7 @@ export default function Dashboard({
                   <button className="btn btn-success float-end"
                     onClick={(event) => {
                       event.preventDefault();
-                      dispatch(enroll({ studentId: currentUser._id, courseId: course._id }))
+                      dispatch(enroll({ user: currentUser._id, course: course._id }))
                     }}>
                     Enroll
                   </button>
