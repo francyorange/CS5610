@@ -37,7 +37,7 @@ export default function Modules() {
                             key={module._id}
                             className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
                             <div className="wd-title p-3 ps-2 bg-secondary">
-                                <BsGripVertical className="me-2 fs-3" />
+                                <BsGripVertical className="me-2 fs-3 only-role-FACULTY" />
                                 {!module.editing && module.name}
                                 {module.editing && (
                                     <input className="form-control w-50 d-inline-block"
@@ -57,7 +57,7 @@ export default function Modules() {
                             </div>
                             <ul className="wd-lessons list-group rounded-0">
                                 {module.lessons && module.lessons.map((lesson: any) => (<li className="wd-lesson list-group-item p-3 ps-1">
-                                    <BsGripVertical className="me-2 fs-3" />
+                                    <BsGripVertical className="me-2 fs-3 only-role-FACULTY" />
                                     {lesson.name}
                                     <LessonControlButtons />
                                 </li>))}

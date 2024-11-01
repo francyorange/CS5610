@@ -10,9 +10,9 @@ export default function ModuleControlButtons({ moduleId, deleteModule, editModul
 
 
     return (
-        <div className="float-end">
-            <FaPencil onClick={() => editModule(moduleId)} className="text-primary me-3" />
-            <FaTrash className="text-danger me-2 mb-1" onClick={() => deleteModule(moduleId)} />
+        <div className="float-end only-role-FACULTY">
+            <FaPencil onClick={() => editModule(moduleId)} className="text-primary me-3 only-role-FACULTY" />
+            <FaTrash className="text-danger me-2 mb-1 " onClick={() => deleteModule(moduleId)} />
             <GreenCheckmark />
             <BsPlus className="fs-4" />
             <IoEllipsisVertical className="fs-4" />

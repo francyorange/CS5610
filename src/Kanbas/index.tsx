@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router";
 import Account from "./Account";
 import Dashboard from "./Dashboard";
@@ -35,10 +36,12 @@ export default function Kanbas() {
             })
         );
     };
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
+
     return (
-        <div id="wd-kanbas">
+        <div id="wd-kanbas" className={`role-${currentUser?.role || 'guest'}`}>
             <KanbasNavigation />
-            <div className="wd-main-content-offset p-3">
+            <div className={`wd-main-content-offset p-3`}>
                 <Routes>
                     <Route path="/" element={<Navigate to="Dashboard" />} />
                     <Route path="/Account/*" element={<Account />} />

@@ -19,14 +19,14 @@ export default function Assignments() {
             <ul id="wd-assignments" className="list-group rounded-0">
                 <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray ">
                     <div className="wd-assignments-title p-3 ps-2 bg-secondary d-flex align-items-center">
-                        <BsGripVertical className="me-2 fs-3" />
+                        <BsGripVertical className="me-2 fs-3 only-role-FACULTY" />
                         <IoCaretDown className="me-2" />
                         ASSIGNMENTS
                         <span className="badge rounded-pill text-dark bg-secondary border border-black ms-auto ">40% of Total</span>
-                        <BsPlus className="fs-4" />
-                        <IoEllipsisVertical className="fs-4" />
+                        <BsPlus className="fs-4 only-role-FACULTY" />
+                        <IoEllipsisVertical className="fs-4 only-role-FACULTY" />
                     </div>
-                    <ul className="wd-assignment-list list-group rounded-0">
+                    <ul className="wd-assignment-list list-group rounded-0 ">
                         {assignments.filter((assignment: { course: any; }) => assignment.course === cid).map((assignment: any) =>
                         (<li className="wd-lesson list-group-item ps-1">
                             <div className="d-flex flex-row align-items-center">
@@ -38,7 +38,7 @@ export default function Assignments() {
                                         <b>{assignment.title}</b></a><br />
                                     <b>Not available until</b> {new Date(new Date(assignment.availableFrom).setDate(new Date(assignment.availableFrom).getDate() - 1)).toISOString().split('T')[0]} 11:59 pm | <b>Due</b> {new Date(assignment.dueDate).toISOString().split('T')[0]} 11:59 pm | {assignment.points} pts
                                 </div>
-                                <div className="flex-shrink-0">
+                                <div className="flex-shrink-0 only-role-FACULTY">
                                     <FaTrash className="text-danger me-2 mb-1" onClick={() => dispatch(deleteAssignment(assignment._id))} />
                                     <LessonControlButtons />
                                 </div>

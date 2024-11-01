@@ -8,7 +8,7 @@ import { TfiAnnouncement } from "react-icons/tfi";
 import { FaBell } from "react-icons/fa";
 export default function CourseStatus() {
     return (
-        <div id="wd-course-status" style={{ width: "300px", paddingLeft: "5px" }}>
+        <div className="only-role-FACULTY" id="wd-course-status" style={{ width: "300px", paddingLeft: "5px" }}>
             <h2>Course Status</h2>
             <div className="d-flex">
                 <div className="w-50 pe-1">

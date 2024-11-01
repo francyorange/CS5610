@@ -42,3 +42,11 @@ body * {
 .wd-lesson {
     border-left: 3px solid green !important;
 }
+
+div#wd-kanbas:not(.role-FACULTY) .only-role-FACULTY {
+    display: none;
+}
+
+div#wd-kanbas.role-FACULTY .only-role-STUDENT {
+    display: none;
+}
