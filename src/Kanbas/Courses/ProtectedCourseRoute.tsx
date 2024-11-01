@@ -8,9 +8,9 @@ export default function ProtectedCourseRoute({ children }: { children: any }) {
     console.log("ProtectedCourseRoute", currentUser._id, cid, enrollments);
     if (currentUser) {
         if (enrollments.some(
-            (enrollment: { studentId: any; courseId: any; }) =>
-                enrollment.studentId === currentUser._id &&
-                enrollment.courseId === cid
+            (enrollment: { user: any; course: any; }) =>
+                enrollment.user === currentUser._id &&
+                enrollment.course === cid
         )) {
             console.log("ProtectedCourseRoute allow", currentUser, cid, enrollments);
             return children;
