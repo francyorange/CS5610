@@ -1,13 +1,17 @@
+import { deleteAssignment } from "./reducer";
+import { useSelector, useDispatch } from "react-redux";
+import { FaTrash } from "react-icons/fa";
+
 import { BsGripVertical, BsPlus } from "react-icons/bs";
 import AssignmentsControls from "./AssignmentsControls";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import { IoCaretDown, IoEllipsisVertical } from "react-icons/io5";
 import { useParams } from "react-router-dom";
-import * as db from "../../Database";
 export default function Assignments() {
     const { cid } = useParams();
-    const { assignments } = db;
+    const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+    const dispatch = useDispatch();
 
     return (
         <div>
@@ -32,9 +36,10 @@ export default function Assignments() {
                                 <div className="flex-grow-1 p-2">
                                     <a className="link-dark link-offset-2 link-underline-opacity-0" href={`/#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
                                         <b>{assignment.title}</b></a><br />
-                                    <span className="text-danger">Multiple Modules</span> | <b>Not available until</b> May 6 at 12:00 am | <b>Due</b> May 13 at 11:59pm | 100 pts
+                                    <b>Not available until</b> {new Date(new Date(assignment.availableFrom).setDate(new Date(assignment.availableFrom).getDate() - 1)).toISOString().split('T')[0]} 11:59 pm | <b>Due</b> {new Date(assignment.dueDate).toISOString().split('T')[0]} 11:59 pm | {assignment.points} pts
                                 </div>
                                 <div className="flex-shrink-0">
+                                    <FaTrash className="text-danger me-2 mb-1" onClick={() => dispatch(deleteAssignment(assignment._id))} />
                                     <LessonControlButtons />
                                 </div>
                             </div>
