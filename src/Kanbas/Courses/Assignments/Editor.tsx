@@ -214,7 +214,7 @@ export default function AssignmentEditor() {
                             to={`/Kanbas/Courses/${cid}/Assignments`}>
                             <button type="button" className="btn btn-secondary me-2">Cancel</button>
                         </Link>
-                        <button type="button" className="btn btn-danger" onClick={handleSubmit}>Save</button>
+                        <button type="button" className="btn btn-danger only-role-FACULTY" onClick={handleSubmit}>Save</button>
                     </div>
                 </form>
             </div>
