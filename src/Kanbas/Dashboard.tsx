@@ -18,7 +18,7 @@ export default function Dashboard({
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
 
-      <button className="btn btn-primary float-end only-role-STUDENT" onClick={() => {
+      <button className="btn btn-primary float-end" onClick={() => {
         setEnableEnrollments((prev) => !prev);
       }}>
         Enrollments
