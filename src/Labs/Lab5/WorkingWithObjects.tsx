@@ -27,6 +27,7 @@ export default function WorkingWithObjects() {
             <input className="form-control w-75" id="wd-assignment-title"
                 defaultValue={assignment.title} onChange={(e) =>
                     setAssignment({ ...assignment, title: e.target.value })} />
+            <br />
             <a id="wd-update-assignment-score" className="btn btn-primary float-end"
                 href={`${ASSIGNMENT_API_URL}/score/${assignment.score}`}>
                 Update Assignment Score
@@ -34,6 +35,7 @@ export default function WorkingWithObjects() {
             <input className="form-control w-75" id="wd-assignment-score"
                 defaultValue={assignment.score} type="number" onChange={(e) =>
                     setAssignment({ ...assignment, score: Number(e.target.value) })} />
+            <br />
             {/* update assignment completed */}
             <a id="wd-update-assignment-completed" className="btn btn-primary float-end"
                 href={`${ASSIGNMENT_API_URL}/completed/${assignment.completed}`}>
@@ -64,6 +66,7 @@ export default function WorkingWithObjects() {
             <input className="form-control w-75" id="wd-module-name"
                 defaultValue={module.name} onChange={(e) =>
                     setModule({ ...module, name: e.target.value })} />
+            <br />
             {/* update module description */}
             <a id="wd-update-module-description" className="btn btn-primary float-end"
                 href={`${MODULE_API_URL}/description/${module.description}`}>

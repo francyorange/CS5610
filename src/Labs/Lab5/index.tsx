@@ -2,6 +2,7 @@ import PathParameters from "../Lab5/PathParameters";
 import EnvironmentVariables from "./EnvironmentVariables";
 import QueryParameters from "../Lab5/QueryParameters";
 import WorkingWithObjects from "./WorkingWithObjects";
+import WorkingWithArrays from "./WorkingWithArrays";
 const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
 
 
@@ -18,6 +19,7 @@ export default function Lab5() {
             <PathParameters />
             <QueryParameters />
             <WorkingWithObjects />
+            <WorkingWithArrays />
         </div>
     );
 }
