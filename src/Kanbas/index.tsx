@@ -1,3 +1,4 @@
+import Session from "./Account/Session";
 import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router";
 import Account from "./Account";
@@ -40,24 +41,27 @@ export default function Kanbas() {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
 
     return (
-        <div id="wd-kanbas" className={`role-${currentUser?.role || 'guest'}`}>
-            <KanbasNavigation />
-            <div className={`wd-main-content-offset p-3`}>
-                <Routes>
-                    <Route path="/" element={<Navigate to="Dashboard" />} />
-                    <Route path="/Account/*" element={<Account />} />
-                    <Route path="/Dashboard" element={<ProtectedRoute><Dashboard courses={courses}
-                        course={course}
-                        setCourse={setCourse}
-                        addNewCourse={addNewCourse}
-                        deleteCourse={deleteCourse}
-                        updateCourse={updateCourse} />
-                    </ProtectedRoute>} />
-                    <Route path="/Courses/:cid/*" element={<ProtectedCourseRoute><Courses courses={courses} /></ProtectedCourseRoute>} />
-                    <Route path="/Calendar" element={<h1>Calendar</h1>} />
-                    <Route path="/Inbox" element={<h1>Inbox</h1>} />
-                </Routes>
+        <Session>
+            <div id="wd-kanbas" className={`role-${currentUser?.role || 'guest'}`}>
+                <KanbasNavigation />
+                <div className={`wd-main-content-offset p-3`}>
+                    <Routes>
+                        <Route path="/" element={<Navigate to="Dashboard" />} />
+                        <Route path="/Account/*" element={<Account />} />
+                        <Route path="/Dashboard" element={<ProtectedRoute><Dashboard courses={courses}
+                            course={course}
+                            setCourse={setCourse}
+                            addNewCourse={addNewCourse}
+                            deleteCourse={deleteCourse}
+                            updateCourse={updateCourse} />
+                        </ProtectedRoute>} />
+                        <Route path="/Courses/:cid/*" element={<ProtectedCourseRoute><Courses courses={courses} /></ProtectedCourseRoute>} />
+                        <Route path="/Calendar" element={<h1>Calendar</h1>} />
+                        <Route path="/Inbox" element={<h1>Inbox</h1>} />
+                    </Routes>
+                </div>
             </div>
-        </div>
+        </Session>
+
     );
 }
