@@ -9,6 +9,7 @@ import "./styles.css";
 import { useEffect, useState } from "react";
 // import * as db from "./Database";
 import * as client from "./Courses/client";
+import * as courseClient from "./Courses/client";
 import * as userClient from "./Account/client";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import ProtectedCourseRoute from "./Courses/ProtectedCourseRoute";
@@ -24,10 +25,12 @@ export default function Kanbas() {
         const newCourse = await userClient.createCourse(course);
         setCourses([...courses, newCourse]);
     };
-    const deleteCourse = (courseId: string) => {
+    const deleteCourse = async (courseId: string) => {
+        const status = await courseClient.deleteCourse(courseId);
         setCourses(courses.filter((course) => course._id !== courseId));
     };
-    const updateCourse = () => {
+    const updateCourse = async () => {
+        await courseClient.updateCourse(course);
         setCourses(
             courses.map((c) => {
                 if (c._id === course._id) {
