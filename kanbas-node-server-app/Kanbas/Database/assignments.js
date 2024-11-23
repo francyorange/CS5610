@@ -8,4 +8,11 @@ export default [
   { "_id": "A301", "title": "Structural Design Task", "course": "RS103" },
   { "_id": "A302", "title": "Orbital Calculations", "course": "RS103" },
   { "_id": "A303", "title": "Systems Engineering Exam", "course": "RS103" }
-]
+].map((assignment) => ({
+  description: "This is the description",
+  points: 100,
+  dueDate: "2024-05-13",
+  availableFrom: "2024-05-06",
+  availableUntil: "2024-05-20",
+  ...assignment
+}))

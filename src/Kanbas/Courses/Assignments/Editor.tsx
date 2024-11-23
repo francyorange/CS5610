@@ -1,11 +1,11 @@
-import { updateAssignment } from "./reducer";
+import { setAssignments, updateAssignment } from "./reducer";
 import { useParams } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
-// import * as db from "../../Database";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import * as assignmentsClient from "./client";
+
 export default function AssignmentEditor() {
-    // const { assignments } = db;
     const { cid, aid } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export default function AssignmentEditor() {
     const [availableFrom, setAvailableFrom] = useState(assignment.availableFrom);
     const [availableUntil, setAvailableUntil] = useState(assignment.availableUntil);
 
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
         const updatedAssignment = {
@@ -45,10 +45,12 @@ export default function AssignmentEditor() {
             availableUntil,
             course: assignment.course
         };
-
+        await assignmentsClient.updateAssignment(updatedAssignment);
         dispatch(updateAssignment(updatedAssignment));
         navigate(`/Kanbas/Courses/${cid}/Assignments`);
     };
+
+
 
     return (
         <>
