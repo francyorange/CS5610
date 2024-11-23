@@ -7,8 +7,6 @@ import KanbasNavigation from "./Navigation";
 import Courses from "./Courses";
 import "./styles.css";
 import { useEffect, useState } from "react";
-// import * as db from "./Database";
-import * as client from "./Courses/client";
 import * as courseClient from "./Courses/client";
 import * as userClient from "./Account/client";
 import ProtectedRoute from "./Account/ProtectedRoute";
@@ -54,6 +52,7 @@ export default function Kanbas() {
         fetchCourses();
     }, [currentUser]);
 
+
     return (
         <Session>
             <div id="wd-kanbas" className={`role-${currentUser?.role || 'guest'}`}>
@@ -67,9 +66,11 @@ export default function Kanbas() {
                             setCourse={setCourse}
                             addNewCourse={addNewCourse}
                             deleteCourse={deleteCourse}
-                            updateCourse={updateCourse} />
+                            updateCourse={updateCourse}
+                            fetchCourses={fetchCourses}
+                        />
                         </ProtectedRoute>} />
-                        <Route path="/Courses/:cid/*" element={<ProtectedCourseRoute><Courses courses={courses} /></ProtectedCourseRoute>} />
+                        <Route path="/Courses/:cid/*" element={<ProtectedCourseRoute courses={courses}><Courses courses={courses} /></ProtectedCourseRoute>} />
                         <Route path="/Calendar" element={<h1>Calendar</h1>} />
                         <Route path="/Inbox" element={<h1>Inbox</h1>} />
                     </Routes>

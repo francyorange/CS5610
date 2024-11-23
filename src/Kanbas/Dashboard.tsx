@@ -1,18 +1,42 @@
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { enroll, unenroll } from "./reducer";
+// import { setEnrollments, enroll, unenroll } from "./reducer";
+import * as userClient from "./Account/client";
+import * as courseClient from "./Courses/client";
+
+
 export default function Dashboard({
   courses, course, setCourse, addNewCourse,
-  deleteCourse, updateCourse }: {
+  deleteCourse, updateCourse, fetchCourses }: {
     courses: any[]; course: any; setCourse: any;
     addNewCourse: any; deleteCourse: any;
-    updateCourse: any;
+    updateCourse: any; fetchCourses: any;
   }) {
+  const [allCourses, setAllCourses] = useState<any[]>([]);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [enableEnrollments, setEnableEnrollments] = useState(false);
-  const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
-  const dispatch = useDispatch();
+  // const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
+  // const dispatch = useDispatch();
+  const fetchAllCourses = async () => {
+    try {
+      const courses = await courseClient.fetchAllCourses();
+      setAllCourses(courses);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchAllCourses();
+  }, [currentUser]);
+  const enrollCourse = async (courseId: string) => {
+    await userClient.enrollUserInCourse(courseId);
+    fetchCourses();
+  };
+  const unenrollCourse = async (courseId: string) => {
+    await userClient.unenrollUserInCourse(courseId);
+    fetchCourses();
+  };
 
   return (
     <div id="wd-dashboard">
@@ -43,26 +67,18 @@ export default function Dashboard({
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
-          {courses
-            .filter((course) =>
-              enrollments.some(
-                (enrollment: { user: any; course: any; }) =>
-                  enrollment.user === currentUser._id &&
-                  enrollment.course === course._id
-              ) || enableEnrollments)
+          {(enableEnrollments ? allCourses : courses)
             .map((course) => {
-              const isEnrolled = enrollments.some(
-                (enrollment: { user: any; course: any; }) =>
-                  enrollment.user === currentUser._id &&
-                  enrollment.course === course._id
-              );
+              const isEnrolled = courses.some(
+                (c) => c._id === course._id
+              )
 
               const enrollmentActions = enableEnrollments ? (
                 isEnrolled ? (
                   <button className="btn btn-danger float-end"
                     onClick={(event) => {
                       event.preventDefault();
-                      dispatch(unenroll({ user: currentUser._id, course: course._id }))
+                      unenrollCourse(course._id)
                     }}>
                     Unenroll
                   </button>
@@ -70,7 +86,7 @@ export default function Dashboard({
                   <button className="btn btn-success float-end"
                     onClick={(event) => {
                       event.preventDefault();
-                      dispatch(enroll({ user: currentUser._id, course: course._id }))
+                      enrollCourse(course._id)
                     }}>
                     Enroll
                   </button>
