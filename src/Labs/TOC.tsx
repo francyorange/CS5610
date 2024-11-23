@@ -48,6 +48,16 @@ export default function TOC() {
           My GitHub
         </a>
       </li>
+      <li className="nav-item">
+        <a id="wd-github-server" href="https://github.com/francyorange/CS5610/tree/a5/kanbas-node-server-app" className="nav-link">
+          GitHub Server
+        </a>
+      </li>
+      <li className="nav-item">
+        <a id="wd-server-url" href={process.env.REACT_APP_REMOTE_SERVER} className="nav-link">
+          Remote Server
+        </a>
+      </li>
     </ul>
   );
 }
