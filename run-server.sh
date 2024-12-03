@@ -4,6 +4,7 @@
 # specify container name "mongo" and do not start a second one if one exists by name
 
 docker run --name mongo -d -p 27017:27017 mongo
+docker start mongo
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
