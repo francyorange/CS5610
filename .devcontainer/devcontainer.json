@@ -12,6 +12,12 @@
       "openFiles": [
         "src/App.jsx"
       ]
+    },
+    "vscode": {
+      "extensions": [
+        "mongodb.mongodb-vscode",
+        "GitHub.copilot"
+      ]
     }
   },
   "portsAttributes": {
