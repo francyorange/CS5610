@@ -1,5 +1,10 @@
 #!/bin/bash
 
+until docker info; do
+  sleep 5
+  echo "Waiting for Docker to start..."
+done
+
 # Docker run "mongo" and forward port 27017 to 27017
 # specify container name "mongo" and do not start a second one if one exists by name
 

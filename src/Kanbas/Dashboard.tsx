@@ -8,10 +8,10 @@ import * as courseClient from "./Courses/client";
 
 export default function Dashboard({
   courses, course, setCourse, addNewCourse,
-  deleteCourse, updateCourse, fetchCourses }: {
+  deleteCourse, updateCourse, fetchCourses, enrolling, setEnrolling }: {
     courses: any[]; course: any; setCourse: any;
     addNewCourse: any; deleteCourse: any;
-    updateCourse: any; fetchCourses: any;
+    updateCourse: any; fetchCourses: any; enrolling: boolean; setEnrolling: (enrolling: boolean) => void;
   }) {
   const [allCourses, setAllCourses] = useState<any[]>([]);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
@@ -40,7 +40,11 @@ export default function Dashboard({
 
   return (
     <div id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+      <h1 id="wd-dashboard-title">Dashboard
+        <button onClick={() => setEnrolling(!enrolling)} className="float-end btn btn-primary" >
+          {enrolling ? "My Courses" : "All Courses"}
+        </button>
+      </h1> <hr />
 
       <button className="btn btn-primary float-end" onClick={() => {
         setEnableEnrollments((prev) => !prev);
@@ -101,6 +105,11 @@ export default function Dashboard({
                       <img src="/images/reactjs.png" width="100%" height={160} />
                       <div className="card-body">
                         <h5 className="wd-dashboard-course-title card-title">
+                          {enrolling && (
+                            <button className={`btn ${course.enrolled ? "btn-danger" : "btn-success"} float-end`} >
+                              {course.enrolled ? "Unenroll" : "Enroll"}
+                            </button>
+                          )}
                           {course.name} </h5>
                         <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{ maxHeight: 100 }}>
                           {course.description} </p>

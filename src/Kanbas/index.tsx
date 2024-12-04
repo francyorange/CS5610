@@ -13,6 +13,33 @@ import ProtectedRoute from "./Account/ProtectedRoute";
 import ProtectedCourseRoute from "./Courses/ProtectedCourseRoute";
 export default function Kanbas() {
     const [courses, setCourses] = useState<any[]>([]);
+    const [enrolling, setEnrolling] = useState<boolean>(false);
+    const findCoursesForUser = async () => {
+        try {
+            const courses = await userClient.findCoursesForUser(currentUser._id);
+            setCourses(courses);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const fetchCourses = async () => {
+        try {
+            const allCourses = await courseClient.fetchAllCourses();
+            const enrolledCourses = await userClient.findCoursesForUser(
+                currentUser._id
+            );
+            const courses = allCourses.map((course: any) => {
+                if (enrolledCourses.find((c: any) => c._id === course._id)) {
+                    return { ...course, enrolled: true };
+                } else {
+                    return course;
+                }
+            });
+            setCourses(courses);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const [course, setCourse] = useState<any>({
         _id: "0", name: "New Course", number: "New Number",
@@ -40,18 +67,24 @@ export default function Kanbas() {
         );
     };
     const { currentUser } = useSelector((state: any) => state.accountReducer);
-    const fetchCourses = async () => {
-        try {
-            const courses = await courseClient.fetchAllCourses();
-            setCourses(courses);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    // const fetchCourses = async () => {
+    //     try {
+    //         const courses = await courseClient.fetchAllCourses();
+    //         setCourses(courses);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
+    // useEffect(() => {
+    //     fetchCourses();
+    // }, [currentUser]);
     useEffect(() => {
-        fetchCourses();
-    }, [currentUser]);
-
+        if (enrolling) {
+            fetchCourses();
+        } else {
+            findCoursesForUser();
+        }
+    }, [currentUser, enrolling]);
 
     return (
         <Session>
@@ -68,6 +101,7 @@ export default function Kanbas() {
                             deleteCourse={deleteCourse}
                             updateCourse={updateCourse}
                             fetchCourses={fetchCourses}
+                            enrolling={enrolling} setEnrolling={setEnrolling}
                         />
                         </ProtectedRoute>} />
                         <Route path="/Courses/:cid/*" element={<ProtectedCourseRoute courses={courses}><Courses courses={courses} /></ProtectedCourseRoute>} />
