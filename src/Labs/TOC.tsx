@@ -44,12 +44,12 @@ export default function TOC() {
         </a>
       </li>
       <li className="nav-item">
-        <a id="wd-github" href="https://github.com/francyorange/CS5610/tree/a5" className="nav-link">
+        <a id="wd-github" href="https://github.com/francyorange/CS5610/tree/a6" className="nav-link">
           My GitHub
         </a>
       </li>
       <li className="nav-item">
-        <a id="wd-github-server" href="https://github.com/francyorange/CS5610/tree/a5/kanbas-node-server-app" className="nav-link">
+        <a id="wd-github-server" href="https://github.com/francyorange/CS5610/tree/a6/kanbas-node-server-app" className="nav-link">
           GitHub Server
         </a>
       </li>
