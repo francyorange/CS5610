@@ -336,7 +336,7 @@ db.getCollection('assignments').insertMany(
     [
         {
             "title": "Propulsion Assignment",
-            "course": courseNumberToId["RS101"]
+            "course": courseNumberToId["RS101"],
         },
         {
             "title": "Combustion Analysis",
@@ -370,7 +370,16 @@ db.getCollection('assignments').insertMany(
             "title": "Systems Engineering Exam",
             "course": courseNumberToId["RS103"]
         }
-    ]
+    ].map((assignment, index) => {
+        return {
+            "description": "New Assignment Description",
+            "points": 100,
+            "dueDate": "2024-05-13",
+            "availableFrom": "2024-05-06",
+            "availableUntil": "2024-05-20",
+            ...assignment,
+        }
+    })
 );
 db.getCollection('users').insertMany(
     [

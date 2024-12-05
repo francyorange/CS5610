@@ -16,7 +16,14 @@ export function deleteAssignment(assignmentId) {
 
 //create and update assignment
 export function updateAssignment(assignmentUpdates) {
-    return model.updateOne({ _id: assignmentUpdates._id }, assignmentUpdates, { upsert: true });
+    if (assignmentUpdates._id === "new") {
+        return createAssignment(assignmentUpdates);
+    }
+    return model.updateOne({ _id: assignmentUpdates._id }, assignmentUpdates);
 }
 
 
+//find assignment by id
+export function findAssignmentById(assignmentId) {
+    return model.findById(assignmentId);
+}

@@ -15,7 +15,7 @@ export default function AssignmentEditor() {
         (assignment: { _id: string | undefined; course: string | undefined; }) =>
             assignment._id === aid
             && assignment.course === cid) || {
-        _id: new Date().getTime().toString(),
+        _id: "new",
         title: "New Assignment",
         description: "New Assignment Description",
         points: 100,
