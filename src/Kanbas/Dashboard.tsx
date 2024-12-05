@@ -8,10 +8,10 @@ import * as courseClient from "./Courses/client";
 
 export default function Dashboard({
   courses, course, setCourse, addNewCourse,
-  deleteCourse, updateCourse, fetchCourses, enrolling, setEnrolling }: {
+  deleteCourse, updateCourse, fetchCourses, enrolling, setEnrolling, updateEnrollment }: {
     courses: any[]; course: any; setCourse: any;
     addNewCourse: any; deleteCourse: any;
-    updateCourse: any; fetchCourses: any; enrolling: boolean; setEnrolling: (enrolling: boolean) => void;
+    updateCourse: any; fetchCourses: any; enrolling: boolean; setEnrolling: (enrolling: boolean) => void; updateEnrollment: (courseId: string, enrolled: boolean) => void
   }) {
   const [allCourses, setAllCourses] = useState<any[]>([]);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
@@ -46,11 +46,11 @@ export default function Dashboard({
         </button>
       </h1> <hr />
 
-      <button className="btn btn-primary float-end" onClick={() => {
+      {/* <button className="btn btn-primary float-end" onClick={() => {
         setEnableEnrollments((prev) => !prev);
       }}>
         Enrollments
-      </button>
+      </button> */}
 
       <div className="only-role-FACULTY">
         <h5>New Course
@@ -106,7 +106,11 @@ export default function Dashboard({
                       <div className="card-body">
                         <h5 className="wd-dashboard-course-title card-title">
                           {enrolling && (
-                            <button className={`btn ${course.enrolled ? "btn-danger" : "btn-success"} float-end`} >
+                            <button onClick={(event) => {
+                              event.preventDefault();
+                              updateEnrollment(course._id, !course.enrolled);
+                            }}
+                              className={`btn ${course.enrolled ? "btn-danger" : "btn-success"} float-end`} >
                               {course.enrolled ? "Unenroll" : "Enroll"}
                             </button>
                           )}

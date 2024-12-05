@@ -13,7 +13,7 @@ db.dropDatabase();
 // db.createCollection('users');
 
 // Create a new document in the collection.
-db.getCollection('courses').insertMany(
+courses =
     [
         {
             "number": "RS101",
@@ -214,13 +214,21 @@ db.getCollection('courses').insertMany(
             "description": "This engineering course offers an in-depth study of hydraulic projects in ancient civilizations, with a special focus on Yu the Great's flood control systems. Covering the design, construction, and impact of ancient dams, canals, and irrigation systems, the course provides insights into early engineering marvels. Comparative studies of hydraulic engineering in other ancient civilizations, such as Mesopotamia and the Indus Valley, are also included to provide a broader historical and technological context."
         }
     ]
+courseNumberToId = {}
+coursesInsertResult = db.getCollection('courses').insertMany(
+    courses
 );
+
+for (let i = 0; i < courses.length; i++) {
+    courseNumberToId[courses[i].number] = coursesInsertResult.insertedIds[i];
+}
+
 db.getCollection('modules').insertMany(
     [
         {
             "name": "Introduction to Rocket Propulsion",
             "description": "Basic principles of rocket propulsion and rocket engines.",
-            "course": "RS101",
+            "course": courseNumberToId["RS101"],
             "lessons": [
                 {
                     "id": "L101",
@@ -245,7 +253,7 @@ db.getCollection('modules').insertMany(
         {
             "name": "Fuel and Combustion",
             "description": "Understanding rocket fuel, combustion processes, and efficiency.",
-            "course": "RS101",
+            "course": courseNumberToId["RS101"],
             "lessons": [
                 {
                     "id": "L201",
@@ -270,7 +278,7 @@ db.getCollection('modules').insertMany(
         {
             "name": "Nozzle Design",
             "description": "Principles of rocket nozzle design and performance optimization.",
-            "course": "RS101",
+            "course": courseNumberToId["RS101"],
             "lessons": [
                 {
                     "id": "L301",
@@ -295,32 +303,32 @@ db.getCollection('modules').insertMany(
         {
             "name": "Fundamentals of Aerodynamics",
             "description": "Basic aerodynamic concepts and fluid dynamics principles.",
-            "course": "RS102"
+            "course": courseNumberToId["RS102"],
         },
         {
             "name": "Subsonic and Supersonic Flow",
             "description": "Understanding subsonic and supersonic aerodynamic behaviors.",
-            "course": "RS102"
+            "course": courseNumberToId["RS102"],
         },
         {
             "name": "Aerodynamic Heating",
             "description": "Study of aerodynamic heating and thermal protection systems.",
-            "course": "RS102"
+            "course": courseNumberToId["RS102"],
         },
         {
             "name": "Spacecraft Structural Design",
             "description": "Fundamentals of designing spacecraft structures and materials selection.",
-            "course": "RS103"
+            "course": courseNumberToId["RS103"],
         },
         {
             "name": "Orbital Mechanics",
             "description": "Understanding orbital dynamics and mission planning.",
-            "course": "RS103"
+            "course": courseNumberToId["RS103"],
         },
         {
             "name": "Spacecraft Systems Engineering",
             "description": "Overview of spacecraft systems and subsystems engineering.",
-            "course": "RS103"
+            "course": courseNumberToId["RS103"],
         }
     ]
 );
@@ -328,39 +336,39 @@ db.getCollection('assignments').insertMany(
     [
         {
             "title": "Propulsion Assignment",
-            "course": "RS101"
+            "course": courseNumberToId["RS101"]
         },
         {
             "title": "Combustion Analysis",
-            "course": "RS101"
+            "course": courseNumberToId["RS101"]
         },
         {
             "title": "Nozzle Design Project",
-            "course": "RS101"
+            "course": courseNumberToId["RS101"]
         },
         {
             "title": "Aerodynamics Quiz",
-            "course": "RS102"
+            "course": courseNumberToId["RS102"]
         },
         {
             "title": "Flow Analysis",
-            "course": "RS102"
+            "course": courseNumberToId["RS102"]
         },
         {
             "title": "Heating Analysis",
-            "course": "RS102"
+            "course": courseNumberToId["RS102"]
         },
         {
             "title": "Structural Design Task",
-            "course": "RS103"
+            "course": courseNumberToId["RS103"]
         },
         {
             "title": "Orbital Calculations",
-            "course": "RS103"
+            "course": courseNumberToId["RS103"]
         },
         {
             "title": "Systems Engineering Exam",
-            "course": "RS103"
+            "course": courseNumberToId["RS103"]
         }
     ]
 );
